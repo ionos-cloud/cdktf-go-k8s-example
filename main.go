@@ -50,7 +50,7 @@ func K8sExampleStack(scope constructs.Construct, id string) cdktf.TerraformStack
 				MinNodeCount: jsii.Number(1),
 				MaxNodeCount: jsii.Number(1),
 			},
-			CpuFamily:        jsii.String("INTEL_XEON"),
+			CpuFamily:        datacenter.CpuArchitecture().Get(jsii.Number(0)).CpuFamily(),
 			AvailabilityZone: jsii.String("AUTO"),
 			StorageType:      jsii.String("SSD"),
 			NodeCount:        jsii.Number(1),
