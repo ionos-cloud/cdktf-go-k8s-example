@@ -1,0 +1,7 @@
+{
+    "name": "infinify-io/dcd",
+    "image": "mcr.microsoft.com/vscode/devcontainers/universal:latest",
+    "extensions": [
+        "golang.Go"
+    ]
+}
