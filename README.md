@@ -33,3 +33,7 @@ go test ./...
 ```
 
 If you are finished experimenting you can do a simple `cdk destroy` to clean up.
+
+## License
+
+[MIT](/LICENSE)
