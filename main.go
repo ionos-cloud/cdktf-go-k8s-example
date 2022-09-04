@@ -3,9 +3,39 @@ package main
 import (
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
+	"github.com/caarlos0/env"
 	"github.com/hashicorp/cdktf-provider-ionoscloud-go/ionoscloud/v2"
 	"github.com/hashicorp/terraform-cdk-go/cdktf"
 )
+
+var cfg *config
+
+type config struct {
+	// AccessKey is the access key for the S3 backend.
+	AccessKey string `env:"ACCESS_KEY" envDefault:""`
+
+	// SecretKey is the secret key for the S3 backend.
+	SecretKey string `env:"SECRET_KEY" envDefault:""`
+
+	// BucketName is the bucket name for the S3 backend.
+	BucketName string `env:"BUCKET_NAME" envDefault:""`
+
+	// Region is the region for the S3 backend.
+	Region string `env:"REGION" envDefault:"de"`
+
+	// Endpoint is the endpoint for the S3 backend.
+	Endpoint string `env:"ENDPOINT" envDefault:"https://S3-eu-central-1.ionoscloud.com"`
+
+	// Key is the key for the S3 backend.
+	Key string `env:"KEY" envDefault:"dev/terraform.tfstate"`
+}
+
+func init() {
+	cfg = &config{}
+	if err := env.Parse(cfg); err != nil {
+		panic(err)
+	}
+}
 
 func K8sExampleStack(scope constructs.Construct, id string) cdktf.TerraformStack {
 	stack := cdktf.NewTerraformStack(scope, &id)
@@ -66,7 +96,22 @@ func K8sExampleStack(scope constructs.Construct, id string) cdktf.TerraformStack
 func main() {
 	app := cdktf.NewApp(nil)
 
-	K8sExampleStack(app, "example")
+	stack := K8sExampleStack(app, "example")
+
+	cdktf.NewS3Backend(stack, &cdktf.S3BackendProps{
+		Region:    jsii.String(cfg.Region),
+		Key:       jsii.String(cfg.Key),
+		Bucket:    jsii.String(cfg.BucketName),
+		AccessKey: jsii.String(cfg.AccessKey),
+		SecretKey: jsii.String(cfg.SecretKey),
+		Endpoint:  jsii.String(cfg.Endpoint),
+
+		// Some extra settings to make the remote state work.
+		SkipMetadataApiCheck:      jsii.Bool(true),
+		SkipRegionValidation:      jsii.Bool(true),
+		SkipCredentialsValidation: jsii.Bool(true),
+		ForcePathStyle:            jsii.Bool(true),
+	})
 
 	app.Synth()
 }

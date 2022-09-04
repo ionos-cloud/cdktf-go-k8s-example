@@ -13,6 +13,7 @@
 * [IONOS Account](https://cloud.ionos.com/)
 * [Terraform](https://www.terraform.io/)
 * [CDK for Terrform](https://learn.hashicorp.com/tutorials/terraform/cdktf-install?in=terraform/cdktf#install-cdktf)
+* [Object Storage Bucket](https://cloud.ionos.com/storage/object-storage)
 
 Optional:
 
@@ -23,6 +24,12 @@ Optional:
 You either have to set the `IONOS_USERNAME` and `IONOS_PASSWORD` or `IONOS_TOKEN` environment variables.
 
 > `ionosctl token create` and `ionosctl token get --token-id` gives you a token.
+
+Furtheremore, you have to set `ACCESS_KEY`, `SECRET_KEY` and `BUCKET_NAME` environment variables for the Terraform backend.
+
+> This can be used in combination with a GitHub Action to deploy the cluster.
+
+> The bucket should have versioning enabled.
 
 ```bash
 cdktf deploy
