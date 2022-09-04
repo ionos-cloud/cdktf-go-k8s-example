@@ -1,5 +1,9 @@
 # CDK for Terraform Go Example
 
+[![Test & Build](https://github.com/ionos-cloud/event-gateway/actions/workflows/main.yml/badge.svg)](https://github.com/ionos-cloud/event-gateway/actions/workflows/main.yml)
+[![Taylor Swift](https://img.shields.io/badge/secured%20by-taylor%20swift-brightgreen.svg)](https://twitter.com/SwiftOnSecurity)
+[![Volkswagen](https://auchenberg.github.io/volkswagen/volkswargen_ci.svg?v=1)](https://github.com/auchenberg/volkswagen)
+
 [Cloud Development Kit for Terraform](https://www.terraform.io/cdktf) (CDKTF) allows you to use familiar programming languages to define and provision infrastructure. This is a simple example of how to use CDKTF to create a [Kubernetes](https://kubernetes.io/) cluster on the IONOS Cloud using the [Go](https://go.dev/) programming language.
 
 :warning: What is deployed is a [Managed Kubernetes Cluster](https://cloud.ionos.de/managed/kubernetes) on the IONOS Cloud :cloud:. Please be aware that this is not for free.
