@@ -25,7 +25,7 @@ You either have to set the `IONOS_USERNAME` and `IONOS_PASSWORD` or `IONOS_TOKEN
 > `ionosctl token create` and `ionosctl token get --token-id` gives you a token.
 
 ```bash
-cdk deploy
+cdktf deploy
 ```
 
 ## Tests
@@ -36,7 +36,7 @@ Writing tests for CDKTF is easy with Go.
 go test ./...
 ```
 
-If you are finished experimenting you can do a simple `cdk destroy` to clean up.
+If you are finished experimenting you can do a simple `cdktf destroy` to clean up.
 
 ## License
 
